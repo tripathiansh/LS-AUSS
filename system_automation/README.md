@@ -1,117 +1,103 @@
-## 📌 Project Overview
-This initiative focuses on the automation of critical Linux system administration tasks using Bash shell scripting. It eliminates manual intervention, reduces operational risks, and enhances system reliability through modular, scalable, and secure scripting solutions.
+# 🚀 Linux System Automation Using Shell Scripting
 
-Each script addresses a specific administrative concern such as disk usage, user management, backups, service monitoring, performance logging, system health, and security assessments. All modules are governed via a master orchestration script and scheduled with `cron` for hands-free execution.
+### 🧩 Project Summary
+
+This project presents a robust and modular Linux system automation framework designed using **Bash shell scripting**. It focuses on streamlining critical administrative tasks such as user management, disk utilization monitoring, automated backups, system health diagnostics, process management, network audits, and security evaluations.
+
+By orchestrating these scripts with a master controller and scheduling via `cron`, the solution reduces manual overhead, enforces consistency, and significantly enhances system reliability and security posture.
 
 ---
 
-## 📂 Folder Structure
+### 📁 Directory Structure
 /system_automation
 ├── scripts/
-│ ├── disk_monitor.sh
-│ ├── log_rotation.sh
-│ ├── user_management.sh
-│ ├── backup.sh
-│ ├── process_monitor.sh
-│ ├── system_health.sh
-│ ├── security_audit.sh
-│ ├── network_monitor.sh
-│ ├── performance_logger.sh
-│ └── master_script.sh
+│   ├── disk_monitor.sh
+│   ├── log_rotation.sh
+│   ├── user_management.sh
+│   ├── backup.sh
+│   ├── process_monitor.sh
+│   ├── system_health.sh
+│   ├── security_audit.sh
+│   ├── network_monitor.sh
+│   ├── performance_logger.sh
+│   └── master_script.sh
 ├── documentation/
-│ ├── project_report.pdf
-│ ├── flowchart.png
-│ ├── usage_guide.txt
-│ ├── installation_guide.pdf
-│ ├── troubleshooting_guide.txt
-│ └── user_manual.pdf
+│   ├── project_report.pdf
+│   ├── installation_guide.pdf
+│   ├── user_manual.pdf
+│   ├── usage_guide.txt
+│   ├── troubleshooting_guide.txt
+│   └── flowchart.png
 └── README.md
 
----
+### 🔧 Features & Modules
 
-## 🎯 Project Objectives
-- **Automate critical administrative tasks** with consistent and repeatable scripts.
-- **Reduce human error** and manual intervention in routine operations.
-- **Enhance system security**, monitoring, and resilience.
-- **Enable real-time alerts** and fault detection via logging and cron jobs.
-- **Create an extensible, modular framework** adaptable to future use cases.
+| Script Name             | Functionality                                                               |
+| ----------------------- | --------------------------------------------------------------------------- |
+| `disk_monitor.sh`       | Alerts when disk usage exceeds defined thresholds                           |
+| `log_rotation.sh`       | Rotates and manages system logs to save space                               |
+| `user_management.sh`    | Adds, deletes, and manages users and access levels                          |
+| `backup.sh`             | Performs automated, timestamped backups of essential directories            |
+| `process_monitor.sh`    | Monitors and restarts failed services                                       |
+| `system_health.sh`      | Displays CPU, memory usage, and uptime metrics                              |
+| `security_audit.sh`     | Detects failed SSH login attempts and logs potential intrusions             |
+| `network_monitor.sh`    | Monitors open ports, connections, and traffic anomalies                     |
+| `performance_logger.sh` | Captures performance statistics over time                                   |
+| `master_script.sh`      | Integrates all scripts for unified automation with logging and error checks |
 
----
+### ⏳ System Requirements
+Operating System: Ubuntu / CentOS / Fedora / Debian
+* Shell Interpreter: bash
+* Utilities Required:
+`df, awk, sed, mail, tar, netstat, pgrep, cron, journalctl, vmstat`
+* Permissions: Root or sudo privileges
+*Connectivity: Network access required for notifications and network monitoring
 
-## 🛠️ System Requirements
-### ✅ Software
-- Linux OS (Ubuntu, Fedora, CentOS, Debian, etc.)
-- Bash shell interpreter
-- Required utilities: `cron`, `mail`, `df`, `tar`, `awk`, `sed`, `pgrep`, `vmstat`, `netstat`
+### ⚙️ Installation & Execution
+1. Clone Repository
+`git clone <repo_url> /opt/system_automation
+cd /opt/system_automation/scripts`
 
-### 🔐 Privileges
-- Administrative (root) access for script execution
-
-### 🌐 Network
-- Necessary for email notifications and remote log integration
-
----
-
-## 🔧 Installation & Setup
-1. Clone or move project to: `/opt/system_automation`
-2. Navigate to the scripts directory:
-   ```bash
-  ``` cd /opt/system_automation/scripts```
-3. Make all scripts executable:
+2. Make Scripts Executable
 `chmod +x *.sh`
-4. Open crontab to schedule tasks:
+
+3. Schedule Scripts via Cron
 `crontab -e`
-Example entry:
-0 * * * * /opt/system_automation/scripts/master_script.sh >> /var/log/sys_auto.log 2>&1
+Example: Run master script every day at 7 AM
+`0 7 * * * /opt/system_automation/scripts/master_script.sh`
 
-### 🧪 Script Modules Summary
-Script Name	Functionality
-disk_monitor.sh	Alerts if disk usage exceeds critical thresholds
-user_management.sh	Adds/removes users via CLI
-backup.sh	Compresses and archives specified directories
-process_monitor.sh	Checks and restarts critical services
-system_health.sh	Outputs memory and CPU usage in real time
-security_audit.sh	Logs failed SSH login attempts
-network_monitor.sh	Shows current network connections and open ports
-performance_logger.sh	Records system stats every second for analysis
-master_script.sh	Orchestrates execution of all modules sequentially
+4. Run Manually (Optional)
+`./master_script.sh`
 
-### 📄 Documentation Highlights
-All related documents are located in the /documentation directory:
 
-project_report.pdf: Comprehensive project overview and technical documentation
+### 📊 Logging & Alerting
+* Logs are maintained per script execution.
+* Errors are captured and sent via email alerts if mail is configured.
+* Logs are stored in /var/log/system_automation/ (suggested path).
 
-installation_guide.pdf: Step-by-step environment setup
-
-user_manual.pdf: Script-specific usage and CLI examples
-
-usage_guide.txt: Parameters, inputs, outputs, and log insights
-
-troubleshooting_guide.txt: Error diagnostics and resolutions
-flowchart.png: Visual representation of the script workflow
+### 📚 Documentation
+* All relevant documents are available in the documentation/ directory:
+* project_report.pdf – Full technical report
+* installation_guide.pdf – Setup and deployment
+* user_manual.pdf – Script-wise usage
+* usage_guide.txt – Command-line guidance
+* troubleshooting_guide.txt – Debugging issues
+* flowchart.png – Visual execution pipeline
 
 ### 🚀 Future Enhancements
-Integration with cloud-based storage for off-site backups
+* Integration with cloud storage for backup redundancy
+* AI-driven anomaly detection modules
+* Web-based dashboards with real-time metrics
+* Role-based access control system
+* Mobile push notification support
 
-AI-powered anomaly detection and predictive monitoring
+### ✅ Conclusion
+This shell scripting solution introduces a scalable, extensible, and production-ready automation model for Linux environments. It empowers system administrators with actionable insights, proactive monitoring, and centralized control — aligning with enterprise-grade DevOps standards.
 
-Web-based dashboards with real-time metrics
+### 📖 References
+* Linux Bash Scripting Guide
+* The Linux Documentation Project
+* Best Practices for Secure Linux Administration
 
-Role-based access controls and mobile push notifications
-
-Automated patch management and compliance reports
-
-### 📚 References
-Linux Bash Scripting Guide
-
-Official Linux Manual Pages
-
-Security Best Practices for System Administrators
-### 🏁 Conclusion
-This project exemplifies a robust, scalable approach to Linux system 
-automation. It significantly reduces the administrative burden, mitigates
-risk, and improves operational efficiency. With modular architecture and 
-future-proof design, it is an ideal foundation for enterprise-grade DevOps 
-integration and proactive infrastructure management.
 
 👤 Author Ansh Tripathi BCA Student | System Automation Enthusiast
