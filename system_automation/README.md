@@ -10,9 +10,8 @@ By orchestrating these scripts with a master controller and scheduling via `cron
 
 ### 📁 Directory Structure
 /system_automation
-├── scripts/
+├── scripts
 │   ├── disk_monitor.sh
-│   ├── log_rotation.sh
 │   ├── user_management.sh
 │   ├── backup.sh
 │   ├── process_monitor.sh
@@ -20,16 +19,16 @@ By orchestrating these scripts with a master controller and scheduling via `cron
 │   ├── security_audit.sh
 │   ├── network_monitor.sh
 │   ├── performance_logger.sh
-│   └── master_script.sh
-├── documentation/
-│   ├── project_report.pdf
-│   ├── installation_guide.pdf
-│   ├── user_manual.pdf
-│   ├── usage_guide.txt
-│   ├── troubleshooting_guide.txt
-│   └── flowchart.png
-└── README.md
-
+│   ├── master_script.sh
+├── README.md
+└── documentation
+    ├── project_report.pdf
+    ├── flowchart.png
+    ├── usage_guide.txt
+    ├── installation_guide.pdf
+    ├── troubleshooting_guide.txt
+    ├── user_manual.pdf
+    
 ### 🔧 Features & Modules
 
 | Script Name             | Functionality                                                               |
