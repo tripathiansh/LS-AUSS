@@ -150,7 +150,7 @@ Process monitoring completed.
 
 ---
 
-4. Automating with Cron Jobs
+## 4. Automating with Cron Jobs
 
 To schedule scripts automatically:
 
@@ -170,7 +170,7 @@ Example entries:
 
 ---
 
-5. Best Practices
+## 5. Best Practices
 
 - Always run scripts with **sudo** where required.  
 - Test each script individually before scheduling with `cron`.  
@@ -184,7 +184,7 @@ Example entries:
 
 ---
 
-6. Summary
+## 6. Summary
 
 This automation project allows IT students and system administrators to:  
 - Save time on repetitive tasks  
@@ -195,4 +195,3 @@ This automation project allows IT students and system administrators to:
 ---
 
 ✅ Focus on *how scripts reduce manual intervention* and *why cron jobs are important* for automation.  
-
