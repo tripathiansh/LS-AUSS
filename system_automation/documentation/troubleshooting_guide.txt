@@ -1,1 +1,143 @@
+===========================================================
+ TROUBLESHOOTING GUIDE - LINUX SYSTEM AUTOMATION PROJECT
+===========================================================
+
+This guide helps IT students and system administrators identify,
+understand, and resolve common issues encountered while running
+the automation scripts in /system_automation.
+
+-------------------------------------
+ GENERAL ISSUES (Affecting All Scripts)
+-------------------------------------
+
+1. Permission Denied
+   - Cause: Script is not executable or insufficient privileges.
+   - Solution:
+     a) Run: chmod +x script_name.sh
+     b) If still denied, run with sudo: sudo ./script_name.sh
+
+2. Command Not Found
+   - Cause: Required utility not installed (e.g., netstat, tar).
+   - Solution:
+     a) Verify with: which <command>
+     b) Install missing package:
+        - Debian/Ubuntu: sudo apt install <package>
+        - CentOS/RHEL: sudo yum install <package>
+
+3. Path Errors
+   - Cause: Running scripts outside project directory or misconfigured PATH.
+   - Solution:
+     a) Always run scripts from /opt/system_automation/scripts
+     b) Optionally add to PATH:
+        echo 'export PATH=$PATH:/opt/system_automation/scripts' >> ~/.bashrc
+        source ~/.bashrc
+
+4. Cron Jobs Not Running
+   - Cause: Cron service disabled or incorrect crontab syntax.
+   - Solution:
+     a) Enable cron: sudo systemctl enable --now cron
+     b) Check syntax: crontab -l
+     c) Review logs: grep CRON /var/log/syslog
+
+------------------------------------
+ SCRIPT-SPECIFIC TROUBLESHOOTING
+------------------------------------
+
+[1] disk_monitor.sh
+-------------------
+Issue: No warning displayed even when disk is full
+- Cause: Threshold set incorrectly or "df" output format mismatch.
+- Solution:
+  a) Check threshold value in script (default 80%).
+  b) Run: df -h and confirm output matches script parsing.
+  c) Adjust awk/sed logic if using non-standard locale.
+
+[2] user_management.sh
+----------------------
+Issue: "useradd: command not found" or "Permission denied"
+- Cause: Missing privileges or useradd not installed.
+- Solution:
+  a) Run with sudo.
+  b) Install required package:
+     - Debian/Ubuntu: sudo apt install passwd
+     - CentOS/RHEL: sudo yum install shadow-utils
+
+Issue: User not found when deleting
+- Cause: Incorrect username or typo.
+- Solution:
+  a) Verify with: cat /etc/passwd
+  b) Retry with correct username.
+
+[3] backup.sh
+-------------
+Issue: "Source directory does not exist"
+- Cause: Backup path in script is invalid.
+- Solution:
+  a) Open script and check SOURCE_DIR variable.
+  b) Update with correct directory path.
+
+Issue: "tar: command not found"
+- Cause: tar not installed.
+- Solution: sudo apt install tar (Debian/Ubuntu) or sudo yum install tar (CentOS/RHEL).
+
+[4] process_monitor.sh
+----------------------
+Issue: Service not restarting
+- Cause: Incorrect service name hardcoded in script.
+- Solution:
+  a) Open script and verify PROCESS variable (e.g., apache2).
+  b) Update with correct service name for your system.
+
+[5] system_health.sh
+--------------------
+Issue: No output or incomplete stats
+- Cause: Missing "uptime" or "free" utilities.
+- Solution: Install with:
+  - Debian/Ubuntu: sudo apt install procps
+  - CentOS/RHEL: sudo yum install procps-ng
+
+[6] security_audit.sh
+---------------------
+Issue: "journalctl: command not found"
+- Cause: systemd not present or journalctl not installed.
+- Solution:
+  a) Use alternative logs: sudo cat /var/log/auth.log
+  b) On RHEL/CentOS, ensure systemd is installed and running.
+
+[7] network_monitor.sh
+----------------------
+Issue: "netstat: command not found"
+- Cause: net-tools not installed.
+- Solution:
+  - Debian/Ubuntu: sudo apt install net-tools
+  - CentOS/RHEL: sudo yum install net-tools
+
+[8] performance_logger.sh
+-------------------------
+Issue: "vmstat: command not found"
+- Cause: sysstat package missing.
+- Solution:
+  - Debian/Ubuntu: sudo apt install sysstat
+  - CentOS/RHEL: sudo yum install sysstat
+
+[9] master_script.sh
+--------------------
+Issue: Only some scripts run or exit early
+- Cause: One script error halts execution.
+- Solution:
+  a) Run individual scripts to identify failing one.
+  b) Add "set -e" or error handling logic as needed.
+
+-----------------------------
+ FINAL CHECKLIST FOR STUDENTS
+-----------------------------
+✔ Ensure all dependencies are installed.
+✔ Run scripts with sudo when modifying users or services.
+✔ Test each script manually before automating with cron.
+✔ Review log outputs regularly for anomalies.
+✔ Keep backup paths and thresholds updated.
+
+===========================================================
+End of Troubleshooting Guide
+===========================================================
 
