@@ -1,197 +1,28 @@
-# 📘 Usage Guide – Linux System Automation Project
+Linux System Automation - Usage Guide
 
-## 1. Introduction
-This guide explains how to use the automation scripts included in the `/system_automation/scripts` directory.  
-The project automates essential Linux system administration tasks such as disk monitoring, user management, backups, process checks, system health monitoring, security auditing, and network analysis.  
+Running Scripts:
+----------------
+- Run disk monitoring:   ./disk_monitor.sh
+- Run user management:   ./user_management.sh add username
+- Run backup:            ./backup.sh /path/to/dir
+- Run process monitor:   ./process_monitor.sh
+- Run system health:     ./system_health.sh
+- Run security audit:    ./security_audit.sh
+- Run network monitor:   ./network_monitor.sh
+- Run performance log:   ./performance_logger.sh
+- Run master script:     ./master_logger.sh
 
-Each script can be run individually or managed collectively through the `master_script.sh`.
+Interpreting Outputs:
+---------------------
+- Disk Monitor: Warning message if >80% usage.
+- Backup: Creates .tar.gz file in backup folder.
+- Process Monitor: Automatically restarts apache2 if stopped.
+- Security Audit: Logs failed SSH attempts in security_audit.log.
 
----
+Examples:
+---------
+$ ./backup.sh /home/user/documents
+Output: Backup created at /backups/documents_2025-09-24.tar.gz
 
-## 2. Prerequisites
-
-Before running the scripts, ensure the following:
-
-- **Operating System**: Linux-based (Ubuntu, Debian, CentOS, Fedora recommended)  
-- **Shell**: `bash`  
-- **Permissions**: Root or sudo privileges (required for user management, backups, and system checks)  
-- **Required Tools**:
-  - `df` – check disk usage  
-  - `tar` – create compressed backups  
-  - `mail` – send alerts (optional)  
-  - `awk`, `sed` – process text/log files  
-  - `pgrep` – monitor processes  
-  - `cron` – schedule jobs  
-  - `netstat` – monitor network connections  
-  - `journalctl` – view security and system logs  
-  - `vmstat` – log performance statistics  
-
----
-
-## 3. How to Run the Scripts
-
-### 3.1 Disk Monitoring (`disk_monitor.sh`)
-Checks all mounted disks and warns if usage > 80%.  
-```bash
-cd /opt/system_automation/scripts
-sudo ./disk_monitor.sh
-```
-✅ **Example Output**:  
-```
-Warning: Disk usage exceeded 80% on /home
-```
-
----
-
-### 3.2 User Management (`user_management.sh`)
-Creates or deletes users via a simple menu.  
-```bash
-sudo ./user_management.sh
-```
-- Option 1 → Create User  
-- Option 2 → Delete User  
-
-✅ **Example Output**:  
-```
-User student created successfully.
-```
-
----
-
-### 3.3 Backup (`backup.sh`)
-Backs up critical directories into `/backup/backup_<date>.tar.gz`.  
-```bash
-sudo ./backup.sh
-```
-✅ **Example Output**:  
-```
-[INFO] Backup successfully created at /backup/backup_2025-09-12.tar.gz
-```
-
----
-
-### 3.4 Process Monitoring (`process_monitor.sh`)
-Monitors `apache2` (can be customized). Restarts automatically if stopped.  
-```bash
-sudo ./process_monitor.sh
-```
-✅ **Example Output**:  
-```
-apache2 is not running, restarting...
-apache2 restarted successfully.
-```
-
----
-
-### 3.5 System Health (`system_health.sh`)
-Displays CPU load and memory usage.  
-```bash
-./system_health.sh
-```
-✅ **Example Output**:  
-```
-CPU Load: 0.25, 0.40, 0.32
-Memory Usage: 1024 MB used
-```
-
----
-
-### 3.6 Security Audit (`security_audit.sh`)
-Shows failed SSH login attempts.  
-```bash
-sudo ./security_audit.sh
-```
-✅ **Example Output**:  
-```
-[INFO] Checking SSH login failures...
-Failed password for invalid user root from 192.168.1.10 port 22
-```
-
----
-
-### 3.7 Network Monitoring (`network_monitor.sh`)
-Lists open ports and active connections.  
-```bash
-./network_monitor.sh
-```
-✅ **Example Output**:  
-```
-tcp   0  0 0.0.0.0:22  0.0.0.0:*  LISTEN  1234/sshd
-```
-
----
-
-### 3.8 Performance Logging (`performance_logger.sh`)
-Logs CPU/memory stats to `performance.log`.  
-```bash
-./performance_logger.sh
-```
-✅ **Example Output**:  
-```
-procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
- 0  0  12345  6789  0  0  ...
-```
-
----
-
-### 3.9 Master Script (`master_script.sh`)
-Runs all scripts in sequence.  
-```bash
-sudo ./master_script.sh
-```
-✅ **Example Output**:  
-```
-Starting System Automation Suite...
-Disk check completed.
-Backup created.
-Process monitoring completed.
-...
-```
-
----
-
-## 4. Automating with Cron Jobs
-
-To schedule scripts automatically:
-
-```bash
-crontab -e
-```
-
-Example entries:
-- Run system health check every hour:  
-  ```
-  0 * * * * /opt/system_automation/scripts/system_health.sh
-  ```
-- Run backup every day at midnight:  
-  ```
-  0 0 * * * /opt/system_automation/scripts/backup.sh
-  ```
-
----
-
-## 5. Best Practices
-
-- Always run scripts with **sudo** where required.  
-- Test each script individually before scheduling with `cron`.  
-- Check logs regularly (`performance.log` and system logs).  
-- Store backups on a separate partition or external drive.  
-- Restrict permissions:  
-  ```bash
-  chmod 700 *.sh
-  ```  
-- Never run scripts from untrusted directories. Always use `/opt/system_automation/`.
-
----
-
-## 6. Summary
-
-This automation project allows IT students and system administrators to:  
-- Save time on repetitive tasks  
-- Minimize human errors  
-- Strengthen system monitoring and security  
-- Build a foundation for advanced DevOps practices  
-
----
-
-✅ Focus on *how scripts reduce manual intervention* and *why cron jobs are important* for automation.  
+$ ./system_health.sh
+Output: CPU Load: 0.45, Memory Used: 1024MB
