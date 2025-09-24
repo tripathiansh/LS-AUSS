@@ -39,6 +39,14 @@ the automation scripts in /system_automation.
      b) Check syntax: crontab -l
      c) Review logs: grep CRON /var/log/syslog
 
+5. Missing Dependencies
+   - Cause: Required utilities not installed (e.g., tar, mail, netstat).
+   - Fix: Install via `sudo apt install <package>`.
+
+6. Backup Failure
+   - Cause: Incorrect directory path or insufficient space.
+   - Fix: Verify path and free disk space.
+
 ------------------------------------
  SCRIPT-SPECIFIC TROUBLESHOOTING
 ------------------------------------
